@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.example.entity.StudentEntity" table="student" schema="mw_exp1">
+        <id name="stuId" column="stu_id"/>
+        <property name="stuName" column="stu_name"/>
+        <property name="sex" column="sex"/>
+        <property name="birthday" column="birthday"/>
+        <property name="classId" column="class_id"/>
+        <!--
+            many-to-one
+            *name: name of “one”
+            *class: class whole path of "one"
+            *column: foreign key of "many"
+        -->
+        <many-to-one name="class" class="org.example.entity.ClazzEntity"
+            column="classId" cascade="save-update">
+        </many-to-one>
+
+        <set name="courseEntitySet">
+            <key column="stuId"></key>
+            <many-to-many class="org.example.entity.CourseEntity" column="courseId"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
