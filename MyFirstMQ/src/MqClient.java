@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 public class MqClient {
 
-	/*写出*/
+//	写出,生产者调用
 	public static void produce(String message)throws Exception{
 		Socket socket = new Socket(InetAddress.getLocalHost(),BrokerServer.SERVICE_PORT);
 
@@ -17,26 +17,27 @@ public class MqClient {
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	/*读入*/
-	public static String consume()throws Exception{
+//	读入，消费者调用
+	public static synchronized String consume()  throws Exception{
 		Socket socket = new Socket(InetAddress.getLocalHost(),BrokerServer.SERVICE_PORT);
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		
+
 		try{
 			PrintWriter out = new PrintWriter(socket.getOutputStream());
 			out.println("CONSUME");
 			out.flush();
+//			socket.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 		String message = in.readLine();
 		return message;
-	
+
 	}
 
 }

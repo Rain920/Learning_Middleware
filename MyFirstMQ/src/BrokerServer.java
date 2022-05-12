@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 public class BrokerServer implements Runnable {
-	public static int SERVICE_PORT = 9999;
+	public static int SERVICE_PORT = 9998;
 	private final Socket socket;
 	public BrokerServer(Socket socket){
 		this.socket = socket;

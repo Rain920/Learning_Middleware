@@ -78,7 +78,6 @@ public class CourseEntity {
     }
 
     @Transient
-
     public Set<StudentEntity> getStudentEntitySet() {
         return studentEntitySet;
     }

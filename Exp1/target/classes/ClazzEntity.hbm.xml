@@ -8,7 +8,7 @@
         <id name="classId" column="class_id"/>
         <property name="className" column="class_name"/>
         
-        <set name="classId" inverse="true" cascade="all">
+        <set name="students" inverse="true" cascade="all">
             <key column="classId"></key>
             <one-to-many class="org.example.entity.StudentEntity"></one-to-many>
         </set>

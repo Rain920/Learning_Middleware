@@ -1,3 +1,4 @@
+import java.util.Date;
 
 public class ProduceClient {
 
@@ -7,7 +8,7 @@ public class ProduceClient {
 	public static void main(String[] args)throws Exception {
 		// TODO Auto-generated method stub
 		MqClient client = new MqClient();
-		client.produce("Hello Java");
+		client.produce("Hello MyFirstMQ!" + new Date().toString());
 	}
 
 }

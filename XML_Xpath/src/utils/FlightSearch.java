@@ -1,3 +1,5 @@
+package utils;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,7 +13,6 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileInputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -46,7 +47,9 @@ public class FlightSearch {
     }
 
 //    到港时间早于10:00的所有航班
-    public static void searchByTime() throws XPathExpressionException, ParseException {
+    public static String searchByTime() throws Exception {
+        init();
+        String result = "";
         NodeList nodeList = (NodeList) xpath.evaluate("//Airline", doc, XPathConstants.NODESET);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
 
@@ -60,18 +63,22 @@ public class FlightSearch {
 
             arriveTime = simpleDateFormat.parse(date);
             if (arriveTime.before(time)) {
-                System.out.println(nodeList.item(i).getTextContent());
+                result += (nodeList.item(i).getTextContent());
             }
 
         }
+        return result;
     }
 
 //    从北京机场出发的所有航班
-    public static void searchByLeave() throws XPathExpressionException{
-        NodeList nodeList = (NodeList) xpath.evaluate("//Airline[LeaveAirport = '北京首都机场']", doc, XPathConstants.NODESET);
+    public static String searchByLeave(String startP) throws Exception {
+        init();
+        String result = "";
+        NodeList nodeList = (NodeList) xpath.evaluate("//Airline[LeaveAirport = startP]", doc, XPathConstants.NODESET);
         for (int i = 0 ; i < nodeList.getLength() ; i++) {
-            System.out.println(nodeList.item(i).getTextContent());
+            result += (nodeList.item(i).getTextContent());
         }
+        return result;
     }
 
     // 获取根元素

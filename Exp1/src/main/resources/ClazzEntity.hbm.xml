@@ -7,7 +7,7 @@
     <class name="org.example.entity.ClazzEntity" table="class" schema="mw_exp1">
         <id name="classId" column="class_id"/>
         <property name="className" column="class_name"/>
-        
+
         <set name="students" inverse="true" cascade="all">
             <key column="classId"></key>
             <one-to-many class="org.example.entity.StudentEntity"></one-to-many>

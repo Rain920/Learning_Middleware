@@ -9,5 +9,12 @@
         <property name="courseName" column="course_name"/>
         <property name="courseHour" column="course_hour"/>
         <property name="credits" column="credits"/>
+
+        <set name="studentEntitySet" inverse="true" cascade="save-update" table="score">
+            <key column="courseId"></key>
+            <many-to-many class="org.example.entity.StudentEntity"
+                column="stuId">
+            </many-to-many>
+        </set>
     </class>
 </hibernate-mapping>
